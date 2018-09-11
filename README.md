@@ -231,7 +231,7 @@ import ModuleTest from './moduleTest';
 
 - Install Webpack and Babel plugins for backend development.
 ```bash
-npm i -D @babel/plugin-transform-runtime webpack-node-externals
+npm i -D @babel/plugin-transform-runtime @babel/runtime webpack-node-externals 
 ```
 
 - Create `webpack.node.config.js` in root directory
