@@ -38,7 +38,7 @@ mkdir unit
 
 - Move `karma.conf.js` to `unit` folder
 ```bash
-mv ./karma.conf.js test/unit
+mv ./karma.conf.js test/unit # run in the root directory
 ```
 
 - Modify `karma.conf.js`'s file for testing
@@ -96,7 +96,7 @@ npm test
 ```
 
 # 2. Webpack and babel (es6) for testing
-- Install packages
+- Install `Webpack` and `Babel` packages
 ```bash
 npm install -D babel-loader @babel/core @babel/preset-env webpack webpack-cli karma-webpack
 ```
@@ -214,6 +214,21 @@ npm test
 
 
 # 3. Webpack(es6) Setup for Backend
+- Make `src` directory
+```bash
+mkdir src
+cd src
+```
+
+- Create `moudleTest.js`, `index.js` files in `src` directory.
+```javascript
+// in moduleTest.js
+export default 'Test';
+
+// in index.js
+import ModuleTest from './moduleTest';
+```
+
 - Install Webpack and Babel plugins for backend development.
 ```bash
 npm i -D @babel/plugin-transform-runtime webpack-node-externals
