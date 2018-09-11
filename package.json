@@ -4,7 +4,9 @@
   "description": "How to setup Karma ",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "start": "nodemon dist/bundle.js",
+    "dev": "webpack --config ./webpack.node.config.js --watch --hot",
+    "build": "webpack --config webpack.node.config.js",
     "karmaInit": "karma init",
     "test": "karma start ./test/unit/karma.conf.js"
   },
@@ -13,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.2",
     "jasmine": "^3.2.0",
@@ -26,6 +29,10 @@
     "karma-webpack": "^3.0.4",
     "phantomjs-prebuilt": "^2.1.16",
     "webpack": "^4.18.0",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "nodemon": "^1.18.4"
   }
 }

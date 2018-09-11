@@ -1,4 +1,4 @@
-# Karma Testing Setup
+# 1. Karma Testing Setup
 - Create npm package.json file
 ```bash
 npm init
@@ -95,7 +95,7 @@ reporters: ['mocha', 'progress'],
 npm test
 ```
 
-## Webpack and babel (es6)
+# 2. Webpack and babel (es6) for testing
 - Install packages
 ```bash
 npm install -D babel-loader @babel/core @babel/preset-env webpack webpack-cli karma-webpack
@@ -210,4 +210,90 @@ module.exports = function(config) {
 - Test 
 ```bash
 npm test
+```
+
+
+# 3. Webpack(es6) Setup for Backend
+- Install Webpack and Babel plugins for backend development.
+```bash
+npm i -D @babel/plugin-transform-runtime webpack-node-externals
+```
+
+- Create `webpack.node.config.js` in root directory
+```javascript
+// webpack.node.config.js
+
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+ 
+module.exports = (env) => ({
+  mode: env && env.mode ? env : 'development',
+  target: 'node',
+  entry: path.resolve(__dirname, 'src/index.js'),
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    hotUpdateChunkFilename: 'hot/hot-update.js',
+    hotUpdateMainFilename: 'hot/hot-update.json'
+  },
+  devtool: 'inline-source-map',
+  externals: [nodeExternals()],
+  module: {
+    rules: [
+      {
+        test: /(\.jsx|\.js)$/,
+        exclude: /(node_modules)/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env'              
+            ],                                               
+          ],
+          plugins: [
+            [
+              require('@babel/plugin-transform-runtime')
+            ]
+          ]
+        },
+      }
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+});
+```
+
+## nodemon
+- Install `nodemon` for watching backend code.
+```bash
+npm i nodemon
+```
+
+- Create `nodemon.json` file at root directory
+```json
+{
+  "ignore": ["*.spec.js"]
+}
+```
+
+## Scripts in package.json
+- Modify `scripts` in `package.json`
+```json
+"scripts": {
+  "start": "nodemon dist/bundle.js",
+  "dev": "webpack --config ./webpack.node.config.js --watch --hot",
+  "build": "webpack --config webpack.node.config.js",
+  "karmaInit": "karma init",
+  "test": "karma start ./test/unit/karma.conf.js"
+},
+```
+
+# 4. Develop your code
+```bash
+npm run dev # [Terminal1] Webpack bundling for live coding.
+npm start   # [Terminal2] Run actuality your program with nodemon to reflect `npm run dev`.
+npm test    # [Terminal3] Live watch your test code.
 ```
