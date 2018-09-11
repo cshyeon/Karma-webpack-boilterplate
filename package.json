@@ -1,5 +1,5 @@
 {
-  "name": "karmaTest2",
+  "name": "karma-webpack-babel-backend",
   "version": "1.0.0",
   "description": "How to setup Karma ",
   "main": "index.js",
