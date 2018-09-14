@@ -1,7 +1,7 @@
-import Test from '../../../src/moduleTest';
+import Test from '~/src/moduleTest';
 
 describe('test1', () => {
-  it('test1 it', function() {
+  it('test1 it', () => {
     expect(Test).toBe('test');
   });
 });

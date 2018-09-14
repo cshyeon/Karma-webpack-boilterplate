@@ -12,6 +12,11 @@ module.exports = (env) => ({
     hotUpdateChunkFilename: 'hot/hot-update.js',
     hotUpdateMainFilename: 'hot/hot-update.json'
   },
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname),
+    }
+  },
   devtool: 'inline-source-map',
   externals: [nodeExternals()],
   module: {

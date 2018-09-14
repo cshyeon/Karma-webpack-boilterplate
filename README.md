@@ -306,7 +306,81 @@ npm i nodemon
 },
 ```
 
-# 4. Develop your code
+# 4. ESLint
+- Install `ESLint` packages
+```bash
+npm install --save-dev eslint eslint-config-airbnb-base eslint-plugin-import eslint-import-resolver-webpack
+```
+
+- Create `ESLint` configuration file in root directory as `.eslintrc.js`
+```javascript
+// .eslintrc.js
+const path = require('path');
+
+module.exports = {
+  "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+  },
+  "parserOptions": {
+      "sourceType": "module"
+  },
+  "extends": [
+      "airbnb-base"
+  ],
+  "settings": { 
+    'import/resolver': {
+      webpack: {
+        config: path.resolve(__dirname, 'webpack.node.config.js')
+      }
+    }
+  },
+  "plugins": [        
+      'import'
+  ],
+};
+```
+
+- Create `.eslintignore` file in the root.
+```
+# .eslintignore
+/dist/
+```
+
+- Add `Webpack` option in `webpack.node.config.js` and `webpack.test.config.js`
+```javascript
+...
+resolve: {
+  alias: {
+    '~': path.resolve(__dirname),
+  }
+},
+...
+```
+
+- Create `.eslintrc.js` file in the `test/unit` directory.
+```javascript
+const path = require('path');
+
+module.exports = {
+  "env": { 
+    "jasmine": true
+  },
+  "globals": { 
+    "expect": true,
+  },
+  "settings": { 
+    'import/resolver': {
+      webpack: {
+        config: path.resolve(__dirname, '../../webpack.test.config.js')
+      }
+    }
+  },
+};
+```
+
+# 5. Develop your code
 ```bash
 npm run dev # [Terminal1] Webpack bundling for live coding.
 npm start   # [Terminal2] Run actuality your program with nodemon to reflect `npm run dev`.
