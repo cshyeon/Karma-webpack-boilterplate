@@ -98,7 +98,7 @@ npm test
 # 2. Webpack and babel (es6) for testing
 - Install `Webpack` and `Babel` packages
 ```bash
-npm install -D babel-loader @babel/core @babel/preset-env webpack webpack-cli karma-webpack
+npm install -D babel-loader @babel/core @babel/preset-env webpack webpack-cli karma-webpack karma-sourcemap-loader
 ```
 
 - Make `webpack.test.config.js` file in root folder
@@ -170,7 +170,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      './index.js': ['webpack']
+      './index.js': ['webpack', 'sourcemap']
     },
 
     // test results reporter to use
